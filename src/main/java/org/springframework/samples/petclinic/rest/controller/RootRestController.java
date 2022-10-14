@@ -38,10 +38,15 @@ public class RootRestController {
     @Value("#{servletContext.contextPath}")
     private String servletContextPath;
 
-	@RequestMapping(value = "/")
+	@RequestMapping(value = "/redirectToSwagger")
 	public void redirectToSwagger(HttpServletResponse response) throws IOException {
 		response.sendRedirect(this.servletContextPath + "/swagger-ui/index.html");
 	}
+	
+	@RequestMapping(value = "/", method = RequestMethod.GET, produces = "application/json")
+        public ResponseEntity<Void> getRoot() {
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
 }
 
