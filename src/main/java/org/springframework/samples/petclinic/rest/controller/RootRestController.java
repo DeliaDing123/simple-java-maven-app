@@ -16,18 +16,16 @@
 
 package org.springframework.samples.petclinic.rest.controller;
 
-import java.io.IOException;
 
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author Vitaliy Fedoriv
- *
  */
 
 @RestController
@@ -35,18 +33,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/")
 public class RootRestController {
 
-    @Value("#{servletContext.contextPath}")
-    private String servletContextPath;
-
-	@RequestMapping(value = "/redirectToSwagger")
-	public void redirectToSwagger(HttpServletResponse response) throws IOException {
-		response.sendRedirect(this.servletContextPath + "/swagger-ui/index.html");
-	}
-	
-	@RequestMapping(value = "/", method = RequestMethod.GET, produces = "application/json")
-        public ResponseEntity<Void> getRoot() {
+    @RequestMapping(value = "/", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<Void> getRoot() {
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
 }
-
